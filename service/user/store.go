@@ -47,8 +47,8 @@ func scanRowIntroUser(rows *sql.Rows) (*types.User, error) {
 }
 
 func (s *Store) CreateUser(user *types.User) error {
-	query := `INSERT INTO users (email, password) VALUES (?, ?)`
-	_, err := s.db.Exec(query, user.Email, user.Password)
+	query := `INSERT INTO users (email, password, firstName, lastName) VALUES (?, ?, ?, ?)`
+	_, err := s.db.Exec(query, user.Email, user.Password, user.FirstName, user.LastName)
 	return err
 }
 
