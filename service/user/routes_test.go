@@ -3,17 +3,17 @@ package user
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
+	// "fmt"
 	"github.com/gorilla/mux"
 	"github.com/pimp13/go-react-project/types"
-	"github.com/stretchr/testify/assert"
+	// "github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 )
 
 // * One test
-
+/*
 type MockUserStore struct {
 	users map[string]*types.User
 }
@@ -74,9 +74,9 @@ func TestHandleRegister(t *testing.T) {
 	}
 	assert.Equal(t, "User registered successfully", response["message"])
 }
-
+*/
 // * Tow test
-/*
+
 type MockUserStore struct{}
 
 func (m *MockUserStore) GetUserByEmail(email string) (*types.User, error) {
@@ -90,8 +90,8 @@ func (m *MockUserStore) CreateUser(user *types.User) error {
 }
 
 func TestUserServiceHandler(t *testing.T) {
-	userStroe := &MockUserStore{}
-	handler := NewHandler(userStroe)
+	userStore := &MockUserStore{}
+	handler := NewHandler(userStore)
 
 	t.Run("should fail if the user the payload is invalid", func(t *testing.T) {
 		payload := types.RegisterUserPayload{
@@ -101,26 +101,21 @@ func TestUserServiceHandler(t *testing.T) {
 			Password:  "password123",
 		}
 		body, _ := json.Marshal(payload)
+
 		req, err := http.NewRequest(http.MethodPost, "/register", bytes.NewBuffer(body))
 		if err != nil {
 			t.Fatal(err)
 		}
 		req.Header.Set("Content-Type", "application/json")
 
-		rr := httptest.NewRecorder()
+		recorder := httptest.NewRecorder()
 		router := mux.NewRouter()
 
 		router.HandleFunc("/register", handler.handleRegister)
-		router.ServeHTTP(rr, req)
-
-		assert.Equal(t, http.StatusCreated, rr.Code)
-		var response map[string]string
-		err = json.Unmarshal(rr.Body.Bytes(), &response)
-		if err != nil {
-			t.Fatal(err)
+		router.ServeHTTP(recorder, req)
+		if recorder.Code != http.StatusBadRequest {
+			t.Errorf("expexted status code %d, got %d", http.StatusBadRequest, recorder.Code)
 		}
-		assert.Equal(t, "User registered successfully", response["message"])
 
 	})
 }
-*/

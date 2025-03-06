@@ -11,6 +11,6 @@ func NewMySQLStorage(cfg mysql.Config) (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer db.Close()
+	
 	return db, nil
 }

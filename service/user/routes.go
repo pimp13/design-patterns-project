@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/gorilla/mux"
 	"github.com/pimp13/go-react-project/service/auth"
 	"github.com/pimp13/go-react-project/types"
@@ -39,10 +40,18 @@ func (h *Handler) handleRegister(res http.ResponseWriter, req *http.Request) {
 		utils.WriteError(res, http.StatusBadRequest, err)
 		return
 	}
+
+	// Validate the payload data
+	if err := utils.Validate.Struct(&payload); err != nil {
+		errors := err.(validator.ValidationErrors)
+		utils.WriteError(res, http.StatusBadRequest, errors)
+		return
+	}
+
 	// Check if user is already registered
 	_, err := h.store.GetUserByEmail(payload.Email)
 	if err == nil {
-		// if existing error user with email input is exists and registerd
+		// if existing error user with email input is existing and registered
 		utils.WriteError(res, http.StatusConflict,
 			fmt.Errorf("user with email %s already exists", payload.Email))
 		return
