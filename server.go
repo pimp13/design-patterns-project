@@ -35,7 +35,6 @@ func main() {
 
 	// Create instance API server
 	server := api.NewAPIServer(config.Envs.Port, db)
-	// Run Application
 	if err := server.Run(); err != nil {
 		log.Fatalf("Error running server: %v", err)
 	}

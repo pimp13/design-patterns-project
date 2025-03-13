@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/pimp13/go-react-project/service/category"
 	"github.com/pimp13/go-react-project/service/user"
 )
 
@@ -29,6 +30,11 @@ func (s *APIServer) Run() error {
 	userStore := user.NewStore(s.db)
 	userHandler := user.NewHandler(userStore)
 	userHandler.RegisterRoutes(subroutine)
+
+	// Category service
+	categoryStore := category.NewStore(s.db)
+	categoryHandler := category.NewHandler(categoryStore)
+	categoryHandler.RegisterRoutes(subroutine)
 
 	log.Printf("Server listening on: http://localhost%s", s.addr)
 	return http.ListenAndServe(s.addr, router)

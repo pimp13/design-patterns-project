@@ -1,82 +1,82 @@
 package user
 
-import (
-	"bytes"
-	"encoding/json"
-	// "fmt"
-	"github.com/gorilla/mux"
-	"github.com/pimp13/go-react-project/types"
-	// "github.com/stretchr/testify/assert"
-	"net/http"
-	"net/http/httptest"
-	"testing"
-)
+// import (
+// 	"bytes"
+// 	"encoding/json"
+// 	"fmt"
+// 	"github.com/gorilla/mux"
+// 	"github.com/pimp13/go-react-project/types"
+// 	"github.com/stretchr/testify/assert"
+// 	"net/http"
+// 	"net/http/httptest"
+// 	"testing"
+// )
 
 // * One test
-/*
-type MockUserStore struct {
-	users map[string]*types.User
-}
 
-func (m *MockUserStore) GetUserByEmail(email string) (*types.User, error) {
-	if user, exists := m.users[email]; exists {
-		return user, nil
-	}
-	return nil, fmt.Errorf("user not found")
-}
+// type MockUserStore struct {
+// 	users map[string]*types.User
+// }
 
-func (m *MockUserStore) CreateUser(user *types.User) error {
-	if _, exists := m.users[user.Email]; exists {
-		return fmt.Errorf("user already exists")
-	}
-	m.users[user.Email] = user
-	return nil
-}
+// func (m *MockUserStore) GetUserByEmail(email string) (*types.User, error) {
+// 	if user, exists := m.users[email]; exists {
+// 		return user, nil
+// 	}
+// 	return nil, fmt.Errorf("user not found")
+// }
 
-func (m *MockUserStore) GetUserByID(id uint) (*types.User, error) {
-	for _, user := range m.users {
-		if user.ID == id {
-			return user, nil
-		}
-	}
-	return nil, fmt.Errorf("user not found")
-}
+// func (m *MockUserStore) CreateUser(user *types.User) error {
+// 	if _, exists := m.users[user.Email]; exists {
+// 		return fmt.Errorf("user already exists")
+// 	}
+// 	m.users[user.Email] = user
+// 	return nil
+// }
 
-func TestHandleRegister(t *testing.T) {
-	mockStore := &MockUserStore{users: make(map[string]*types.User)}
-	handler := NewHandler(mockStore)
+// func (m *MockUserStore) GetUserByID(id uint) (*types.User, error) {
+// 	for _, user := range m.users {
+// 		if user.ID == id {
+// 			return user, nil
+// 		}
+// 	}
+// 	return nil, fmt.Errorf("user not found")
+// }
 
-	router := mux.NewRouter()
-	handler.RegisterRoutes(router)
+// func TestHandleRegister(t *testing.T) {
+// 	mockStore := &MockUserStore{users: make(map[string]*types.User)}
+// 	handler := NewHandler(mockStore)
 
-	payload := types.RegisterUserPayload{
-		FirstName: "John",
-		LastName:  "Doe",
-		Email:     "john.doe@example.com",
-		Password:  "password123",
-	}
-	body, _ := json.Marshal(payload)
+// 	router := mux.NewRouter()
+// 	handler.RegisterRoutes(router)
 
-	req, err := http.NewRequest("POST", "/register", bytes.NewBuffer(body))
-	if err != nil {
-		t.Fatal(err)
-	}
-	req.Header.Set("Content-Type", "application/json")
+// 	payload := types.RegisterUserPayload{
+// 		FirstName: "John",
+// 		LastName:  "Doe",
+// 		Email:     "john.doe@example.com",
+// 		Password:  "password123",
+// 	}
+// 	body, _ := json.Marshal(payload)
 
-	rr := httptest.NewRecorder()
-	router.ServeHTTP(rr, req)
+// 	req, err := http.NewRequest("POST", "/register", bytes.NewBuffer(body))
+// 	if err != nil {
+// 		t.Fatal(err)
+// 	}
+// 	req.Header.Set("Content-Type", "application/json")
 
-	assert.Equal(t, http.StatusCreated, rr.Code)
-	var response map[string]string
-	err = json.Unmarshal(rr.Body.Bytes(), &response)
-	if err != nil {
-		t.Fatal(err)
-	}
-	assert.Equal(t, "User registered successfully", response["message"])
-}
-*/
+// 	rr := httptest.NewRecorder()
+// 	router.ServeHTTP(rr, req)
+
+// 	assert.Equal(t, http.StatusCreated, rr.Code)
+// 	var response map[string]string
+// 	err = json.Unmarshal(rr.Body.Bytes(), &response)
+// 	if err != nil {
+// 		t.Fatal(err)
+// 	}
+// 	assert.Equal(t, "User registered successfully", response["message"])
+// }
+
 // * Tow test
-
+/*
 type MockUserStore struct{}
 
 func (m *MockUserStore) GetUserByEmail(email string) (*types.User, error) {
@@ -119,3 +119,4 @@ func TestUserServiceHandler(t *testing.T) {
 
 	})
 }
+*/

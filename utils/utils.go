@@ -32,5 +32,8 @@ func WriteJSON(rw http.ResponseWriter, status int, payload any) error {
 }
 
 func WriteError(rw http.ResponseWriter, status int, err error) {
-	WriteJSON(rw, status, map[string]string{"error": err.Error()})
+	err1 := WriteJSON(rw, status, map[string]string{"error": err.Error()})
+	if err1 != nil {
+		return
+	}
 }
